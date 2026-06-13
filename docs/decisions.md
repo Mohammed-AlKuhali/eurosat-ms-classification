@@ -44,3 +44,21 @@ scale factor, so DN and reflectance give identical values; computing pre-norm
 keeps them physically interpretable. EuroSAT predates the Jan-2022 baseline-04.00
 offset, so no −1000 correction is applied. Division guarded by ε, output clipped
 to [−1, 1] and asserted finite.
+
+## Modelling — Tier 1 (classical)
+
+**D7 — Random Forest on per-band + index statistics as the interpretable tier.**
+Two arms on the committed split: C1 (RGB band statistics, 15 features) and C2
+(12-band statistics + NDVI/NDWI/NDBI/NDRE statistics, 68 features). RF needs no
+feature scaling, handles mixed-scale features, and gives permutation importance
+for free — directly serving the brief's "feature extraction" and band-understanding
+criteria.
+
+**Result (Tier-1, 5,400-image test):** C1 RGB = 79.3% acc / 78.5% macro-F1;
+C2 multispectral = 91.4% acc / 91.1% macro-F1 — a **+12.2 pp** gain from spectral
+information. Top permutation-importance features include the NDWI and NDRE
+indices, confirming the engineered indices carry real signal. *Interview framing:*
+this large Tier-1 gain contrasts with the small/near-zero gain expected for
+ImageNet-pretrained CNNs at full data — evidence that spectral information matters
+most when there is no powerful pretrained RGB representation to lean on, which is
+the same mechanism behind the data-efficiency hypothesis (E6).
