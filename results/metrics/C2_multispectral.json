@@ -1,0 +1,22 @@
+{
+  "accuracy": 0.9144444444444444,
+  "macro_f1": 0.9108805235652391,
+  "balanced_accuracy": 0.9119166666666667,
+  "per_class_recall": {
+    "AnnualCrop": 0.865,
+    "Forest": 0.99,
+    "HerbaceousVegetation": 0.95,
+    "Highway": 0.706,
+    "Industrial": 0.924,
+    "Pasture": 0.9225,
+    "PermanentCrop": 0.89,
+    "Residential": 0.9116666666666666,
+    "River": 0.97,
+    "SeaLake": 0.99
+  },
+  "n": 5400,
+  "arm": "C2_multispectral",
+  "tier": "classical",
+  "model": "RandomForest",
+  "seed": 42
+}
