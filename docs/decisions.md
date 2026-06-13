@@ -62,3 +62,37 @@ this large Tier-1 gain contrasts with the small/near-zero gain expected for
 ImageNet-pretrained CNNs at full data — evidence that spectral information matters
 most when there is no powerful pretrained RGB representation to lean on, which is
 the same mechanism behind the data-efficiency hypothesis (E6).
+
+## Modelling — Tier 2 (CNN)
+
+**D8 — ResNet18 backbone, one frozen recipe across all arms.**
+ResNet18 (not ResNet50/ViT) because at 64×64 it fine-tunes in minutes, letting us
+afford 8 arms × 3 seeds + a data-efficiency curve; the ~0.3–0.9 pp a bigger
+backbone would add is worth far less than that breadth, and the brief grades
+analysis over raw accuracy. One recipe — AdamW (lr 1e-3, wd 1e-4), cosine
+schedule, batch 64, ≤30 epochs, early stop (patience 7) on val macro-F1,
+flips+90° augmentation, 64×64 — is selected once on E1's val slice and frozen for
+every arm, so arms differ only in inputs and pretraining, never in tuning.
+(Planned: an LR sanity sweep on E2's val, run at GPU time, to confirm the MS arm
+isn't disadvantaged by RGB-tuned settings.)
+
+**D9 — Conv1 adaptation via timm `in_chans=N`, not hand-rolled surgery.**
+timm repeats the pretrained RGB first-conv weights cyclically to N channels and
+rescales by 3/N to preserve activation magnitude (the I3D "inflation" recipe).
+Citable and bug-free; replication is known to beat random-init for extra channels.
+
+**D10 — Augmentation is flips + 90° rotations only (no photometric jitter).**
+Colour/brightness jitter would corrupt the physical meaning of reflectance values
+and the spectral indices derived from them — unacceptable for a study whose whole
+point is spectral information. The dihedral group is label- and spectrum-preserving
+for nadir satellite patches.
+
+**D11 — Add SSL4EO-S12 arms (E7 all-band, E7b RGB) to complete a 2×2.**
+With only ImageNet (RGB-domain) pretraining, a "MS ties/loses to RGB" result at
+full data could be dismissed as a pretraining artifact. Adding torchgeo's
+SSL4EO-S12 ResNet18 weights — 13-band (E7) and RGB (E7b), both Sentinel-2-domain —
+gives a {ImageNet, SSL4EO} × {RGB, all-band} 2×2 that separates *pretraining
+domain* from *spectral information*. Verified: weights load with only the
+classification head fresh. SSL4EO arms keep all 13 bands in SSL4EO order (B8A
+9th) and use DN/10000 normalisation to match their pretraining distribution —
+normalisation is therefore a per-arm property, not global.

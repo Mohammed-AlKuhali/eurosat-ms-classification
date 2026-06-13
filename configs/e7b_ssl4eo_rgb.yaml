@@ -1,0 +1,12 @@
+arm: E7b_ssl4eo_rgb
+bands: [B04, B03, B02]
+indices: []
+normalization: div10000
+pretrained: ssl4eo_rgb_moco
+backbone: resnet18
+epochs: 30
+batch_size: 64
+lr: 0.001
+weight_decay: 0.0001
+patience: 7
+seeds: [0, 1, 2]

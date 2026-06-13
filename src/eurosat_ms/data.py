@@ -138,26 +138,42 @@ def compute_train_stats(
     train_manifest: pd.DataFrame,
     out_path: str | Path | None = None,
 ) -> dict:
-    """Per-band mean/std over the TRAIN split only (leak-free z-score stats).
+    """Per-band and per-index mean/std over the TRAIN split only (leak-free).
 
-    Uses streaming sums so memory stays flat regardless of train size.
+    Band stats drive z-score normalisation of raw reflectance channels; index
+    stats standardise the engineered NDVI/NDWI/NDBI/NDRE/MNDWI channels so that,
+    in arm E3, reflectance and index inputs share a comparable scale and neither
+    can be accused of confounding the comparison. Uses streaming sums so memory
+    stays flat regardless of train size.
     """
+    from .features import INDEX_DEFS, normalized_difference
+
     data_root = Path(data_root)
+    index_names = list(INDEX_DEFS)
     n_pix = 0
     s = np.zeros(N_BANDS, dtype=np.float64)
     ss = np.zeros(N_BANDS, dtype=np.float64)
+    si = np.zeros(len(index_names), dtype=np.float64)
+    ssi = np.zeros(len(index_names), dtype=np.float64)
     for rel in train_manifest["path"]:
-        img = load_patch(data_root / rel).astype(np.float64)  # (13, H, W)
-        flat = img.reshape(N_BANDS, -1)
+        img = load_patch(data_root / rel)  # (13, H, W) uint16
+        flat = img.reshape(N_BANDS, -1).astype(np.float64)
         s += flat.sum(axis=1)
         ss += (flat ** 2).sum(axis=1)
+        for j, name in enumerate(index_names):
+            idx = normalized_difference(img, *INDEX_DEFS[name]).astype(np.float64).ravel()
+            si[j] += idx.sum()
+            ssi[j] += (idx ** 2).sum()
         n_pix += flat.shape[1]
     mean = s / n_pix
-    var = np.maximum(ss / n_pix - mean ** 2, 0.0)
-    std = np.sqrt(var)
+    std = np.sqrt(np.maximum(ss / n_pix - mean ** 2, 0.0))
+    imean = si / n_pix
+    istd = np.sqrt(np.maximum(ssi / n_pix - imean ** 2, 0.0))
     stats = {
         "band_mean": {b: float(mean[i]) for i, b in enumerate(BAND_ORDER)},
         "band_std": {b: float(std[i]) for i, b in enumerate(BAND_ORDER)},
+        "index_mean": {n: float(imean[j]) for j, n in enumerate(index_names)},
+        "index_std": {n: float(istd[j]) for j, n in enumerate(index_names)},
         "n_images": int(len(train_manifest)),
         "n_pixels": int(n_pix),
     }

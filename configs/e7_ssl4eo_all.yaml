@@ -1,0 +1,12 @@
+arm: E7_ssl4eo_all
+bands: [B01, B02, B03, B04, B05, B06, B07, B08, B8A, B09, B10, B11, B12]
+indices: []
+normalization: div10000
+pretrained: ssl4eo_all_moco
+backbone: resnet18
+epochs: 30
+batch_size: 64
+lr: 0.001
+weight_decay: 0.0001
+patience: 7
+seeds: [0, 1, 2]

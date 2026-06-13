@@ -1,0 +1,12 @@
+arm: E3_indices
+bands: [B04, B03, B02]
+indices: [NDVI, NDWI, NDBI, NDRE]
+normalization: zscore
+pretrained: imagenet
+backbone: resnet18
+epochs: 30
+batch_size: 64
+lr: 0.001
+weight_decay: 0.0001
+patience: 7
+seeds: [0, 1, 2]

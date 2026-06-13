@@ -1,0 +1,12 @@
+arm: E5a_rgb_scratch
+bands: [B04, B03, B02]
+indices: []
+normalization: zscore
+pretrained: none
+backbone: resnet18
+epochs: 30
+batch_size: 64
+lr: 0.001
+weight_decay: 0.0001
+patience: 10
+seeds: [0, 1, 2]

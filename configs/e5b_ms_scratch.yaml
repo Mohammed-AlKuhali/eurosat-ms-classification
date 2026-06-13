@@ -1,0 +1,12 @@
+arm: E5b_ms_scratch
+bands: [B01, B02, B03, B04, B05, B06, B07, B08, B09, B11, B12, B8A]
+indices: []
+normalization: zscore
+pretrained: none
+backbone: resnet18
+epochs: 30
+batch_size: 64
+lr: 0.001
+weight_decay: 0.0001
+patience: 10
+seeds: [0, 1, 2]
