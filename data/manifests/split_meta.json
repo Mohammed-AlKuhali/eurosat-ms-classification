@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "test_frac": 0.2,
+  "val_frac_of_train": 0.1,
+  "counts": {
+    "train": 19440,
+    "val": 2160,
+    "test": 5400
+  },
+  "total": 27000
+}
