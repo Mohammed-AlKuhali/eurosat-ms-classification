@@ -1,0 +1,94 @@
+{
+  "seed": 42,
+  "per_class": {
+    "AnnualCrop": [
+      "AnnualCrop/AnnualCrop_127.tif",
+      "AnnualCrop/AnnualCrop_445.tif"
+    ],
+    "Forest": [
+      "Forest/Forest_2261.tif",
+      "Forest/Forest_2257.tif"
+    ],
+    "HerbaceousVegetation": [
+      "HerbaceousVegetation/HerbaceousVegetation_2844.tif",
+      "HerbaceousVegetation/HerbaceousVegetation_1244.tif"
+    ],
+    "Highway": [
+      "Highway/Highway_1239.tif",
+      "Highway/Highway_2185.tif"
+    ],
+    "Industrial": [
+      "Industrial/Industrial_383.tif",
+      "Industrial/Industrial_461.tif"
+    ],
+    "Pasture": [
+      "Pasture/Pasture_1932.tif",
+      "Pasture/Pasture_605.tif"
+    ],
+    "PermanentCrop": [
+      "PermanentCrop/PermanentCrop_636.tif",
+      "PermanentCrop/PermanentCrop_2024.tif"
+    ],
+    "Residential": [
+      "Residential/Residential_20.tif",
+      "Residential/Residential_1503.tif"
+    ],
+    "River": [
+      "River/River_2436.tif",
+      "River/River_466.tif"
+    ],
+    "SeaLake": [
+      "SeaLake/SeaLake_2512.tif",
+      "SeaLake/SeaLake_501.tif"
+    ]
+  },
+  "confusion_pair_extra": {
+    "River": [
+      "River/River_1519.tif",
+      "River/River_2036.tif"
+    ],
+    "Highway": [
+      "Highway/Highway_726.tif",
+      "Highway/Highway_2238.tif"
+    ],
+    "AnnualCrop": [
+      "AnnualCrop/AnnualCrop_59.tif",
+      "AnnualCrop/AnnualCrop_658.tif"
+    ],
+    "PermanentCrop": [
+      "PermanentCrop/PermanentCrop_2459.tif",
+      "PermanentCrop/PermanentCrop_1410.tif",
+      "PermanentCrop/PermanentCrop_1821.tif",
+      "PermanentCrop/PermanentCrop_369.tif"
+    ],
+    "HerbaceousVegetation": [
+      "HerbaceousVegetation/HerbaceousVegetation_906.tif",
+      "HerbaceousVegetation/HerbaceousVegetation_220.tif",
+      "HerbaceousVegetation/HerbaceousVegetation_1988.tif",
+      "HerbaceousVegetation/HerbaceousVegetation_1527.tif"
+    ],
+    "Pasture": [
+      "Pasture/Pasture_441.tif",
+      "Pasture/Pasture_6.tif"
+    ]
+  },
+  "confusion_pairs": [
+    [
+      "River",
+      "Highway"
+    ],
+    [
+      "AnnualCrop",
+      "PermanentCrop"
+    ],
+    [
+      "PermanentCrop",
+      "HerbaceousVegetation"
+    ],
+    [
+      "Pasture",
+      "HerbaceousVegetation"
+    ]
+  ],
+  "note": "Pre-registered before any model results existed (cherry-pick guard)."
+}

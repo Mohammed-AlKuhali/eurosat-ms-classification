@@ -1,0 +1,2 @@
+run_a,run_b,b_a_only_correct,c_b_only_correct,discordant,statistic,pvalue,method,candidate_base
+C1_rgb,C2_multispectral,122,779,901,477.6204217536071,7.039425787106118e-106,chi2-corrected,C2_multispectral_tier1
