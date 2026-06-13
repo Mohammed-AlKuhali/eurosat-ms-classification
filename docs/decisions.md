@@ -96,3 +96,15 @@ domain* from *spectral information*. Verified: weights load with only the
 classification head fresh. SSL4EO arms keep all 13 bands in SSL4EO order (B8A
 9th) and use DN/10000 normalisation to match their pretraining distribution —
 normalisation is therefore a per-arm property, not global.
+
+## Extension — water segmentation
+
+**D12 — NDWI/MNDWI thresholding vs a small hand-labelled set; pixel-pooled IoU/Dice.**
+EuroSAT has no pixel ground truth, so (as the brief suggests) we hand-label ~18
+River/SeaLake patches and evaluate index thresholding against them. We compare
+NDWI (B03,B08) vs MNDWI (B03,B11) and fixed-threshold vs Otsu, and report a
+pixel-pooled micro-average alongside per-patch spread — the honest aggregate when
+water area varies from a thin river to a full lake. Framed as illustrative and
+resolution-limited (a river is ~3 px wide at 10 m/px); the point is to show, with
+a metric, that NIR/SWIR bands localise water where RGB alone cannot. Sample set
+chosen by fixed seed and documented. Citations: McFeeters 1996, Xu 2006, Otsu 1979.
