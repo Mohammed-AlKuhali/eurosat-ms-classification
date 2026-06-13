@@ -108,3 +108,21 @@ water area varies from a thin river to a full lake. Framed as illustrative and
 resolution-limited (a river is ~3 px wide at 10 m/px); the point is to show, with
 a metric, that NIR/SWIR bands localise water where RGB alone cannot. Sample set
 chosen by fixed seed and documented. Citations: McFeeters 1996, Xu 2006, Otsu 1979.
+
+## Reproducibility / pipeline robustness
+
+**D13 — Smoke runs are isolated; skip-if-done validates completeness (not mere existence).**
+A bug surfaced during the first full run: the RGB baseline (E1) reported ~27%
+accuracy while the multispectral arm hit 98%. Root cause (found by systematic
+debugging, not guesswork) was *not* the model — a prior `--smoke` sanity run
+(1 epoch, 64 images) had written E1 metrics into the canonical `results/` dir
+under the same run-id, and the idempotent skip-if-done logic, which only checked
+*file existence*, then skipped E1's real training. Fixed at the source with
+defense-in-depth: (1) smoke runs now write to an isolated `results/_smoke/` dir
+so they can never overwrite real results; (2) a run counts as "complete" only if
+its metrics cover the full test set (`n == |test|`) and carry `smoke=False` — a
+leftover smoke result (n=32) no longer masquerades as done. Guarded by unit tests
+(`tests/test_run_completeness.py`). *Interview framing:* the diagnostic signal was
+that the on-disk "result" had n=32 (=15/32 acc) not n=5400 — committing per-sample
+prediction CSVs and an `n` field made the contamination detectable in seconds. The
+RGB and multispectral arms differ only in input bands, never in correctness.

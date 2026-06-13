@@ -59,6 +59,29 @@ def run_id(arm: str, seed: int, fraction: float) -> str:
     return rid
 
 
+def _smoke_dirs(results_dir, ckpt_dir) -> tuple[Path, Path]:
+    """Isolated output dirs for smoke runs, so a 1-epoch/64-image sanity check
+    can never overwrite (and thus poison) the canonical full-run results."""
+    return Path(results_dir) / "_smoke", Path(ckpt_dir) / "_smoke"
+
+
+def _is_run_complete(metrics_path: Path, manifest_dir: str | Path) -> bool:
+    """A cached run counts as complete only if it evaluated the FULL test set
+    and is not a smoke run. Existence alone is insufficient: a leftover smoke
+    result (n=32) must not cause the real run to be skipped."""
+    metrics_path = Path(metrics_path)
+    if not metrics_path.exists():
+        return False
+    try:
+        m = json.loads(metrics_path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return False
+    if m.get("smoke"):
+        return False
+    expected_n = len(load_manifest(manifest_dir, "test"))
+    return int(m.get("n", -1)) == expected_n
+
+
 def _evaluate(model, loader, device) -> tuple[np.ndarray, np.ndarray]:
     model.eval()
     preds, ys = [], []
@@ -91,8 +114,11 @@ def train_arm(
     data_root = Path(data_root) if data_root else default_data_root()
     device = device or pick_device()
     rid = run_id(cfg["arm"], seed, fraction)
+    # Smoke runs write to an isolated dir so they can never poison real results.
+    if smoke:
+        results_dir, ckpt_dir = _smoke_dirs(results_dir, ckpt_dir)
     metrics_path = Path(results_dir) / "metrics" / f"{rid}.json"
-    if metrics_path.exists() and not smoke:
+    if not smoke and _is_run_complete(metrics_path, manifest_dir):
         print(f"[skip] {rid} already complete")
         return json.loads(metrics_path.read_text())
 
@@ -170,7 +196,7 @@ def train_arm(
             "tier": "cnn", "arm_base": cfg["arm"], "seed": seed, "fraction": fraction,
             "in_chans": in_chans, "pretrained": cfg.get("pretrained", "imagenet"),
             "best_val_macro_f1": float(best_f1), "train_seconds": round(time.time() - t0, 1),
-            "n_train": int(len(train_m)),
+            "n_train": int(len(train_m)), "smoke": smoke,
         },
     )
     print(f"  [{rid}] TEST acc={metrics['accuracy']:.4f} macroF1={metrics['macro_f1']:.4f} "
