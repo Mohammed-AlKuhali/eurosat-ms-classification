@@ -1,21 +1,21 @@
-# Reproducibility: pinned for Python 3.12. Reported numbers were produced on
-# Google Colab (T4 GPU). torch/torchgeo/timm are only needed for the CNN arms
-# (Steps 3+); the data layer and Tier-1 classical baseline need only the top block.
+# Reproducibility: versions used to produce the reported results (Python 3.12,
+# Apple Silicon M4 / PyTorch MPS). The data layer and Tier-1 classical baseline
+# need only the top block; torch/torchgeo/timm are for the CNN arms.
 
-# --- data layer + classical baseline ---
-numpy==2.1.3
-pandas==2.2.3
-scikit-learn==1.5.2
-tifffile==2024.9.20
-PyYAML==6.0.2
-matplotlib==3.9.2
-tqdm==4.66.5
+# --- data layer + classical baseline + analysis ---
+numpy==2.4.6
+pandas==3.0.3
+scikit-learn==1.9.0
+tifffile==2026.6.1
+PyYAML==6.0.3
+matplotlib==3.11.0
+tqdm==4.68.2
 statsmodels==0.14.4          # McNemar (analysis)
 scikit-image==0.24.0         # Otsu thresholding (segmentation extension)
 
-# --- CNN arms (installed in the Colab environment) ---
+# --- CNN arms ---
 torch==2.5.1
 torchvision==0.20.1
 timm==1.0.11                 # conv1 inflation via in_chans=N
 torchgeo==0.6.2              # SSL4EO-S12 Sentinel-2 pretrained weights
-grad-cam==1.5.4              # Grad-CAM visualisations
+grad-cam==1.5.4              # Grad-CAM explainability

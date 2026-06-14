@@ -64,8 +64,8 @@ report/              the written report (<=2000 words)
 
 ## Reproducibility notes
 
-- Reported numbers were produced on Google Colab (NVIDIA T4). The data layer and
-  classical baseline run on CPU anywhere.
+- Reported numbers were produced locally on Apple Silicon (M4, PyTorch MPS). The
+  data layer and classical baseline run on CPU anywhere.
 - Splits and statistics are committed, so results are auditable without
   re-downloading the 2 GB dataset.
 - Seeds are fixed; bitwise determinism across hardware is not guaranteed, so
