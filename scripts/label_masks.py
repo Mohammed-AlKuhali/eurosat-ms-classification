@@ -65,10 +65,24 @@ def main() -> None:
             print(f"  [{done}] {p}")
         return
 
+    import matplotlib
     import matplotlib.pyplot as plt
     from matplotlib.path import Path as MplPath
     from matplotlib.widgets import PolygonSelector
-    from eurosat_ms.visualize import true_color, index_map
+    from eurosat_ms.visualize import true_color, index_map  # forces 'Agg' on import
+    # visualize.py selects the headless 'Agg' backend (right for figure files, but
+    # it gives no window). Restore an interactive backend so the labeller displays.
+    for _backend in ("macosx", "qtagg", "tkagg"):
+        try:
+            matplotlib.use(_backend, force=True)
+            break
+        except Exception:
+            continue
+    else:
+        raise SystemExit(
+            "No interactive matplotlib backend found. Install one (pip install PyQt5) "
+            "or use the no-GUI subjective evaluation instead."
+        )
 
     data_root = Path(args.data_root) if args.data_root else default_data_root()
     ys, xs = np.mgrid[0:64, 0:64]
