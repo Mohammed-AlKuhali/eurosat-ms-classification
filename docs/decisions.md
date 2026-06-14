@@ -126,3 +126,22 @@ leftover smoke result (n=32) no longer masquerades as done. Guarded by unit test
 that the on-disk "result" had n=32 (=15/32 acc) not n=5400 — committing per-sample
 prediction CSVs and an `n` field made the contamination detectable in seconds. The
 RGB and multispectral arms differ only in input bands, never in correctness.
+
+## Compute-budget scoping
+
+**D14 — Seed budget concentrated on the arms that carry the claims.**
+Local M4/MPS training costs ~33 min per full ResNet18 run, so the seed budget is
+spent where it changes a conclusion, not uniformly. **3 seeds** (mean±std +
+per-seed paired McNemar) on the arms the argument rests on: the mandatory
+comparison E1/E2/E3 and the data-efficiency curve E6 (where the multispectral
+effect is expected and variance is largest). **1 seed** on the supporting arms:
+the from-scratch confound controls E5a/E5b and the SSL4EO 2×2 (E7/E7b) — each
+makes a directional point (does the effect survive without ImageNet pretraining;
+does a Sentinel-2-pretrained backbone change the picture) that a single run
+illustrates adequately; we report these as point estimates, not with error bars.
+**E4 (RGB+NIR) dropped** from the default run — its question (does adding spectral
+channels to RGB help) is answered more thoroughly by E2 (12-band) and E3
+(RGB+indices), so it is redundant; the config remains for anyone who wants it.
+This is a deliberate, documented scope cut, not an omission — the headline result,
+the significance testing, and the data-efficiency story all retain full 3-seed
+rigour.
