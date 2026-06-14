@@ -6,8 +6,24 @@ multispectral approaches on the [EuroSAT](https://github.com/phelber/EuroSAT)
 dataset, compares them under an identical 80/20 split, and analyses *where and
 why* spectral information helps — not just headline accuracy.
 
-> Status: work in progress. Results tables and the full report are added as the
-> experiments complete.
+**Full report:** [`report/report.pdf`](report/report.pdf) (LaTeX source: `report/report.tex`).
+
+## Headline result
+
+Spectral information beyond RGB helps **conditionally** — strongly for classical
+features and for in-domain-pretrained / from-scratch networks, but negligibly (or
+harmfully) for ImageNet-pretrained networks, especially with few labels.
+
+| Comparison | RGB | Multispectral | Δ |
+|---|---|---|---|
+| Classical RF (C1 vs C2) | 79.3% | **91.4%** | **+12.2 pp** (McNemar p≈7e-106) |
+| ResNet-18 from scratch (E5a vs E5b) | 96.5% | **98.2%** | +1.7 pp |
+| SSL4EO-pretrained (E7b vs E7) | 94.4% | **97.2%** | +2.8 pp |
+| ImageNet-pretrained, full data (E1 vs E2) | **98.4%** | 98.3% | ~0 (n.s.) |
+| ImageNet-pretrained, 1% labels | **81.4%** | 74.7% | −6.7 pp |
+
+Best overall: **E3 (RGB + NDVI/NDWI/NDBI/NDRE), 98.69 ± 0.07%**. Water-segmentation
+extension: NDWI + Otsu, micro-IoU 0.51 / Dice 0.68 on 11 hand-labelled patches.
 
 ## Quickstart
 
