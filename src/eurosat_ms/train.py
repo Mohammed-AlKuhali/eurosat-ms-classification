@@ -42,14 +42,20 @@ def pick_device() -> str:
 
 
 def subsample_train(manifest: pd.DataFrame, fraction: float, seed: int) -> pd.DataFrame:
-    """Stratified subsample of the train manifest for the data-efficiency curve."""
+    """Stratified subsample of the train manifest for the data-efficiency curve.
+
+    Iterates groups and concatenates rather than ``groupby(...).apply``: in
+    pandas >=2.2 the grouping column ('label') is excluded from apply's frame,
+    which silently dropped the label column and crashed the dataset. Iterating
+    keeps every column and is deterministic given the seed.
+    """
     if fraction >= 1.0:
         return manifest
-    return (
-        manifest.groupby("label", group_keys=False)
-        .apply(lambda g: g.sample(frac=fraction, random_state=seed))
-        .reset_index(drop=True)
-    )
+    parts = [
+        g.sample(frac=fraction, random_state=seed)
+        for _, g in manifest.groupby("label")
+    ]
+    return pd.concat(parts).sort_values("path").reset_index(drop=True)
 
 
 def run_id(arm: str, seed: int, fraction: float) -> str:
