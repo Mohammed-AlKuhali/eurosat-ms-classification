@@ -1,0 +1,74 @@
+{
+  "seed": 7,
+  "n_requested": 18,
+  "patches": [
+    "River/River_1115.tif",
+    "River/River_1515.tif",
+    "River/River_2287.tif",
+    "River/River_238.tif",
+    "River/River_253.tif",
+    "River/River_452.tif",
+    "River/River_585.tif",
+    "River/River_75.tif",
+    "River/River_84.tif",
+    "SeaLake/SeaLake_1350.tif",
+    "SeaLake/SeaLake_1708.tif",
+    "SeaLake/SeaLake_176.tif",
+    "SeaLake/SeaLake_1854.tif",
+    "SeaLake/SeaLake_1953.tif",
+    "SeaLake/SeaLake_2259.tif",
+    "SeaLake/SeaLake_2904.tif",
+    "SeaLake/SeaLake_376.tif",
+    "SeaLake/SeaLake_465.tif"
+  ],
+  "labelled": {
+    "River/River_1115.tif": {
+      "mask": "River_River_1115.npy",
+      "water_px": 1521
+    },
+    "River/River_1515.tif": {
+      "mask": "River_River_1515.npy",
+      "water_px": 425
+    },
+    "River/River_2287.tif": {
+      "mask": "River_River_2287.npy",
+      "water_px": 867
+    },
+    "River/River_238.tif": {
+      "mask": "River_River_238.npy",
+      "water_px": 0
+    },
+    "River/River_253.tif": {
+      "mask": "River_River_253.npy",
+      "water_px": 449
+    },
+    "River/River_452.tif": {
+      "mask": "River_River_452.npy",
+      "water_px": 1683
+    },
+    "River/River_585.tif": {
+      "mask": "River_River_585.npy",
+      "water_px": 1191
+    },
+    "River/River_75.tif": {
+      "mask": "River_River_75.npy",
+      "water_px": 801
+    },
+    "River/River_84.tif": {
+      "mask": "River_River_84.npy",
+      "water_px": 239
+    },
+    "SeaLake/SeaLake_1350.tif": {
+      "mask": "SeaLake_SeaLake_1350.npy",
+      "water_px": 666
+    },
+    "SeaLake/SeaLake_176.tif": {
+      "mask": "SeaLake_SeaLake_176.npy",
+      "water_px": 72
+    },
+    "SeaLake/SeaLake_465.tif": {
+      "mask": "SeaLake_SeaLake_465.npy",
+      "water_px": 208
+    }
+  }
+}

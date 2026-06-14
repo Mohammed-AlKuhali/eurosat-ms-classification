@@ -43,9 +43,15 @@ def main() -> None:
     labels_dir = Path(args.labels_dir)
     manifest = json.loads((labels_dir / "labels.json").read_text())
     data_root = Path(args.data_root) if args.data_root else default_data_root()
-    items = list(manifest["labelled"].items())
+    all_items = list(manifest["labelled"].items())
+    # Skip empty ground-truth masks (0 water px): they are labelling failures or
+    # genuinely water-free, and IoU/Dice are undefined/uninformative on them.
+    items = [(rel, info) for rel, info in all_items if info.get("water_px", 0) > 0]
+    excluded = [rel for rel, info in all_items if info.get("water_px", 0) == 0]
     if not items:
-        raise SystemExit("No labelled masks found. Run scripts/label_masks.py first.")
+        raise SystemExit("No non-empty labelled masks found. Run scripts/label_masks.py first.")
+    if excluded:
+        print(f"Excluding {len(excluded)} empty mask(s): {excluded}")
     print(f"Evaluating on {len(items)} hand-labelled patches.")
 
     imgs = [load_patch(data_root / rel) for rel, _ in items]
