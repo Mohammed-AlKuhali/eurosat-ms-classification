@@ -39,4 +39,11 @@ run configs/e7b_ssl4eo_rgb.yaml
 # (RGB+indices). Run manually if desired: run configs/e4_rgbnir.yaml
 # (Documented as a scope cut in docs/decisions.md, D14.)
 
-echo "All experiments complete. Metrics in results/metrics/."
+echo "########## Analysis: tables + figures (all report artifacts) ##########"
+python scripts/analyze.py                 # McNemar, per-class, confusion, data-efficiency, gallery
+python scripts/run_segmentation.py        # water-segmentation IoU/Dice (uses committed hand labels)
+python scripts/make_band_figure.py        # per-class spectral signatures
+python scripts/make_report_gallery.py     # compact subjective gallery
+python scripts/make_gradcam.py            # Grad-CAM explainability (needs E1/E2 checkpoints)
+
+echo "All experiments + analysis complete. Tables in results/tables/, figures in results/figures/."

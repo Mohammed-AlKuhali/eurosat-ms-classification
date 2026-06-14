@@ -8,6 +8,13 @@ version = "0.1.0"
 description = "RGB vs multispectral land-use classification on EuroSAT (Sentinel-2)"
 requires-python = ">=3.12"
 readme = "README.md"
+# Core deps: enough for the data layer, the Tier-1 classical baseline, analysis
+# and the tests. The CNN arms additionally need torch/torchvision/timm/torchgeo/
+# grad-cam (see requirements.txt for the full pinned set used for the results).
+dependencies = [
+  "numpy", "pandas", "scikit-learn", "tifffile", "PyYAML",
+  "matplotlib", "tqdm", "statsmodels", "scikit-image", "pytest",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

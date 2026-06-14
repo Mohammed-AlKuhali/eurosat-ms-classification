@@ -12,6 +12,7 @@ matplotlib==3.11.0
 tqdm==4.68.2
 statsmodels==0.14.4          # McNemar (analysis)
 scikit-image==0.24.0         # Otsu thresholding (segmentation extension)
+pytest==9.1.0                # test suite (band order, split integrity, indices)
 
 # --- CNN arms ---
 torch==2.5.1

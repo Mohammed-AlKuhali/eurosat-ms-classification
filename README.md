@@ -42,10 +42,18 @@ python scripts/make_manifests.py
 
 # 4. Run the test suite (band-order, indices, split integrity)
 pytest
+
+# 5. Reproduce the Tier-1 classical results only (fast, CPU, no torch needed)
+python scripts/run_classical.py
+python scripts/analyze.py
+
+# 6. Reproduce everything (full CNN matrix + all tables/figures) — needs a GPU
+DEVICE=mps bash scripts/run_all.sh    # DEVICE=cuda on NVIDIA; ~5-7 GPU-hours
 ```
 
 If you already have `EuroSAT_MS/` locally, point `EUROSAT_DATA_ROOT` at it and
-skip step 2.
+skip step 2. `run_all.sh` is idempotent: completed runs skip themselves, and it
+ends by rebuilding every table and figure under `results/`.
 
 ## Repository layout
 

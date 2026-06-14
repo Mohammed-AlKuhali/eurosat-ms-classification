@@ -87,10 +87,11 @@ trains a Random Forest on per-band and per-index summary statistics; it is
 interpretable and yields permutation importance directly. Arm C1 uses RGB
 statistics; C2 uses the 12 bands plus the four indices.
 
-\textbf{Tier~2 (deep)} fine-tunes a ResNet-18~\cite{he2016} under one frozen
-recipe shared across all arms (AdamW, cosine schedule, $\le 30$ epochs, early
-stopping on validation macro-F1), so arms differ only in inputs and pretraining,
-never in tuning. Arm \textbf{E1} is the ImageNet-pretrained RGB baseline; \textbf{E2}
+\textbf{Tier~2 (deep)} fine-tunes a ResNet-18~\cite{he2016} under one recipe,
+selected on the RGB baseline's validation split and applied unchanged to every
+arm (AdamW, cosine schedule, $\le 30$ epochs, early stopping on validation
+macro-F1), so arms differ only in inputs and pretraining, not tuning. Arm
+\textbf{E1} is the ImageNet-pretrained RGB baseline; \textbf{E2}
 ingests the 12 bands by inflating the first convolution---timm replicates the
 pretrained RGB filters across channels and rescales by $3/N$ to preserve
 activation magnitude~\cite{carreira2017,wightman2019}; \textbf{E3} appends the four
@@ -167,19 +168,33 @@ physics predicts: River $+28$~pp, Highway $+24$, Herbaceous Vegetation $+23$,
 Permanent Crop $+20$; the top permutation-importance features are the NDWI and
 NDRE indices.
 
-\textbf{The 2$\times$2} (Table~\ref{tab:full}, lower block) is decisive: under
-SSL4EO Sentinel-2 pretraining the all-band model beats RGB ($97.2$ vs
+\textbf{The 2$\times$2} (Table~\ref{tab:full}, lower block) points the same way:
+under SSL4EO Sentinel-2 pretraining the all-band model beats RGB ($97.2$ vs
 $94.4$\%, $+2.8$~pp)---the reverse of the ImageNet rows where the two tie.
-Training from scratch agrees: 12-band (E5b, $98.2$\%) beats RGB (E5a,
-$96.5$\%). The subjective gallery (Fig.~\ref{fig:gallery}) shows the same classes
-the confusion analysis flags---water and crop types---separating cleanly in
-false-colour and NDWI views that RGB lacks.
+Training from scratch agrees: 12-band (E5b, $98.2$\%) beats RGB (E5a, $96.5$\%).
+These four arms are single-seed point estimates, so I read them as indicative;
+the statistical weight rests on the classical and data-efficiency results. The
+subjective gallery (Fig.~\ref{fig:gallery}) shows the same classes the confusion
+analysis flags---water and crop types---separating cleanly in false-colour and
+NDWI views that RGB lacks, and Grad-CAM (Fig.~\ref{fig:gradcam}) shows the RGB and
+multispectral models attending to the same discriminative structures (the river
+channel, the road junction), so at full data the extra bands add spectral context
+rather than redirecting where the network looks.
 
 \textbf{Segmentation} (Table~\ref{tab:seg}): on 11 hand-labelled patches,
 NDWI+Otsu is best (micro-IoU $0.509$, Dice $0.675$). Otsu beats a fixed
 threshold for both indices, and NDWI beats MNDWI---plausibly because the SWIR
 bands feeding MNDWI are upsampled from 20~m and blur the thin ($\sim$3~px)
 rivers.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.66\textwidth]{gradcam.png}
+\caption{Grad-CAM for the RGB (E1) and multispectral (E2) models on three test
+patches. Both attend to the same discriminative regions, consistent with their
+near-identical full-data accuracy.}
+\label{fig:gradcam}
+\end{figure}
 
 \begin{table}[t]
 \centering\small
@@ -291,19 +306,24 @@ so indices are discriminative features, not calibrated physical quantities, and
 the 20/60~m bands are cubic-spline upsampled, leaving SWIR/red-edge effectively
 lower-resolution (visible in the segmentation result). With three seeds, the
 reported standard deviations are indicative rather than inferential---my
-significance claims rest on McNemar, not on overlapping error bars---and the
-supporting arms are single-seed point estimates. The segmentation evaluation uses
-only 11 patches with thin rivers, so its variance is high and it should be read
-as illustrative. Natural extensions are a spatial-holdout evaluation, larger or
+significance claims rest on McNemar, not on overlapping error bars. The
+confound-control and SSL4EO arms are single-seed with no significance test; the
+two SSL4EO checkpoints differ in self-supervised pretraining as well as band
+count, and the shared recipe was tuned on the RGB baseline (an arm-specific
+learning-rate check is future work), so I treat the $2\times2$ and from-scratch
+comparisons as indicative. The segmentation evaluation uses only 11 patches with
+thin rivers, so its variance is high and it should be read as illustrative. Natural extensions are a spatial-holdout evaluation, larger or
 transformer backbones, L2A surface-reflectance inputs, more seeds, and
 semi-supervised methods for the low-label regime~\cite{gomez2021}.
 
 \section{Reproducibility}
 The repository contains the full pipeline, committed split manifests,
 normalisation statistics, per-seed metrics and all figures.
-\texttt{scripts/download\_data.py} fetches the checksum-verified dataset and
-\texttt{scripts/run\_all.sh} reproduces every result; test suites guard band
-order, split integrity and label subsampling.
+\texttt{scripts/download\_data.py} fetches the checksum-verified dataset,
+\texttt{scripts/make\_manifests.py} regenerates the committed split, and
+\texttt{scripts/run\_all.sh} trains every arm and then rebuilds all tables and
+figures (analysis, segmentation, Grad-CAM); test suites guard band order, split
+integrity and label subsampling.
 
 \begin{thebibliography}{99}\small
 \bibitem{helber2019} P.~Helber, B.~Bischke, A.~Dengel, D.~Borth. EuroSAT: A
