@@ -133,7 +133,12 @@ def train_arm(
     if smoke:
         train_m, val_m, test_m = train_m.head(64), val_m.head(32), test_m.head(32)
 
-    n_workers = 0 if smoke else cfg.get("num_workers", 4)
+    # num_workers defaults to 0: multiprocessing DataLoader workers can deadlock
+    # at process teardown on macOS/MPS (observed: a finished run sat at 0% CPU
+    # without exiting, stalling the sequential matrix). With 64x64 patches the
+    # GPU is the bottleneck anyway, so single-process loading costs little and
+    # removes the hang entirely. Override per-config via num_workers if on CUDA.
+    n_workers = 0 if smoke else cfg.get("num_workers", 0)
 
     def make_loader(m, train):
         ds = EuroSATArmDataset(data_root, m, bands, indices, stats, norm, train=train)
