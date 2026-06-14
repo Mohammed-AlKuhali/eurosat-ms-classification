@@ -1,0 +1,29 @@
+{
+  "accuracy": 0.9355555555555556,
+  "macro_f1": 0.9335564519357057,
+  "balanced_accuracy": 0.9332,
+  "per_class_recall": {
+    "AnnualCrop": 0.9483333333333334,
+    "Forest": 0.9616666666666667,
+    "HerbaceousVegetation": 0.9033333333333333,
+    "Highway": 0.886,
+    "Industrial": 0.98,
+    "Pasture": 0.925,
+    "PermanentCrop": 0.85,
+    "Residential": 0.9833333333333333,
+    "River": 0.906,
+    "SeaLake": 0.9883333333333333
+  },
+  "n": 5400,
+  "arm": "E6_rgb__s0__f0.05",
+  "tier": "cnn",
+  "arm_base": "E6_rgb",
+  "seed": 0,
+  "fraction": 0.05,
+  "in_chans": 3,
+  "pretrained": "imagenet",
+  "best_val_macro_f1": 0.9379173410712612,
+  "train_seconds": 82.4,
+  "n_train": 972,
+  "smoke": false
+}

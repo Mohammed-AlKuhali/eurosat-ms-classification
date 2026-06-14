@@ -1,2 +1,9 @@
-run_a,run_b,b_a_only_correct,c_b_only_correct,discordant,statistic,pvalue,method,candidate_base
-C1_rgb,C2_multispectral,122,779,901,477.6204217536071,7.039425787106118e-106,chi2-corrected,C2_multispectral_tier1
+run_a,run_b,b_a_only_correct,c_b_only_correct,discordant,statistic,pvalue,method,pvalue_holm,significant,candidate_base
+E1_rgb__s0,E2_multispectral__s0,53,56,109,0.03669724770642202,0.8480827592882225,chi2-corrected,0.8480827592882225,False,E2_multispectral
+E1_rgb__s1,E2_multispectral__s1,92,59,151,6.781456953642384,0.009210967565590318,chi2-corrected,0.027632902696770954,True,E2_multispectral
+E1_rgb__s2,E2_multispectral__s2,50,66,116,1.9396551724137931,0.1637059798328916,chi2-corrected,0.3274119596657832,False,E2_multispectral
+E1_rgb__s0,E3_indices__s0,40,51,91,1.098901098901099,0.29450739368010714,chi2-corrected,0.5890147873602143,False,E3_indices
+E1_rgb__s1,E3_indices__s1,41,49,90,0.5444444444444444,0.4605966187047711,chi2-corrected,0.5890147873602143,False,E3_indices
+E1_rgb__s2,E3_indices__s2,40,66,106,5.89622641509434,0.015173359750556302,chi2-corrected,0.045520079251668906,True,E3_indices
+E1_rgb__s0,E7_ssl4eo_all__s0,125,54,179,27.374301675977655,1.6764433446019947e-07,chi2-corrected,1.6764433446019947e-07,True,E7_ssl4eo_all
+C1_rgb,C2_multispectral,122,779,901,477.6204217536071,7.039425787106118e-106,chi2-corrected,,,C2_multispectral_tier1

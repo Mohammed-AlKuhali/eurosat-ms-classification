@@ -1,0 +1,105 @@
+=== E1_rgb | device=mps | seeds=[0, 1, 2] | fractions=[1.0] ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/Users/mohammedalkuhali/AI and Machine Learning Researcher/eurosat-ms-classification/src/eurosat_ms/train.py:158: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+  [E1_rgb__s0] epoch 1/30 val_macroF1=0.9406
+  [E1_rgb__s0] epoch 2/30 val_macroF1=0.9621
+  [E1_rgb__s0] epoch 3/30 val_macroF1=0.9631
+  [E1_rgb__s0] epoch 4/30 val_macroF1=0.9700
+  [E1_rgb__s0] epoch 5/30 val_macroF1=0.9641
+  [E1_rgb__s0] epoch 6/30 val_macroF1=0.9730
+  [E1_rgb__s0] epoch 7/30 val_macroF1=0.9696
+  [E1_rgb__s0] epoch 8/30 val_macroF1=0.9701
+  [E1_rgb__s0] epoch 9/30 val_macroF1=0.9392
+  [E1_rgb__s0] epoch 10/30 val_macroF1=0.9664
+  [E1_rgb__s0] epoch 11/30 val_macroF1=0.9768
+  [E1_rgb__s0] epoch 12/30 val_macroF1=0.9738
+  [E1_rgb__s0] epoch 13/30 val_macroF1=0.9757
+  [E1_rgb__s0] epoch 14/30 val_macroF1=0.9727
+  [E1_rgb__s0] epoch 15/30 val_macroF1=0.9759
+  [E1_rgb__s0] epoch 16/30 val_macroF1=0.9715
+  [E1_rgb__s0] epoch 17/30 val_macroF1=0.9777
+  [E1_rgb__s0] epoch 18/30 val_macroF1=0.9776
+  [E1_rgb__s0] epoch 19/30 val_macroF1=0.9813
+  [E1_rgb__s0] epoch 20/30 val_macroF1=0.9788
+  [E1_rgb__s0] epoch 21/30 val_macroF1=0.9788
+  [E1_rgb__s0] epoch 22/30 val_macroF1=0.9824
+  [E1_rgb__s0] epoch 23/30 val_macroF1=0.9802
+  [E1_rgb__s0] epoch 24/30 val_macroF1=0.9815
+  [E1_rgb__s0] epoch 25/30 val_macroF1=0.9826
+  [E1_rgb__s0] epoch 26/30 val_macroF1=0.9808
+  [E1_rgb__s0] epoch 27/30 val_macroF1=0.9816
+  [E1_rgb__s0] epoch 28/30 val_macroF1=0.9808
+  [E1_rgb__s0] epoch 29/30 val_macroF1=0.9796
+  [E1_rgb__s0] epoch 30/30 val_macroF1=0.9806
+/Users/mohammedalkuhali/AI and Machine Learning Researcher/eurosat-ms-classification/src/eurosat_ms/train.py:191: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(best_path, map_location=device))
+  [E1_rgb__s0] TEST acc=0.9848 macroF1=0.9843 (2363.0s)
+/Users/mohammedalkuhali/AI and Machine Learning Researcher/eurosat-ms-classification/src/eurosat_ms/train.py:158: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+  [E1_rgb__s1] epoch 1/30 val_macroF1=0.9412
+  [E1_rgb__s1] epoch 2/30 val_macroF1=0.9630
+  [E1_rgb__s1] epoch 3/30 val_macroF1=0.9572
+  [E1_rgb__s1] epoch 4/30 val_macroF1=0.9654
+  [E1_rgb__s1] epoch 5/30 val_macroF1=0.9541
+  [E1_rgb__s1] epoch 6/30 val_macroF1=0.9639
+  [E1_rgb__s1] epoch 7/30 val_macroF1=0.9696
+  [E1_rgb__s1] epoch 8/30 val_macroF1=0.9698
+  [E1_rgb__s1] epoch 9/30 val_macroF1=0.9624
+  [E1_rgb__s1] epoch 10/30 val_macroF1=0.9708
+  [E1_rgb__s1] epoch 11/30 val_macroF1=0.9673
+  [E1_rgb__s1] epoch 12/30 val_macroF1=0.9727
+  [E1_rgb__s1] epoch 13/30 val_macroF1=0.9711
+  [E1_rgb__s1] epoch 14/30 val_macroF1=0.9714
+  [E1_rgb__s1] epoch 15/30 val_macroF1=0.9783
+  [E1_rgb__s1] epoch 16/30 val_macroF1=0.9733
+  [E1_rgb__s1] epoch 17/30 val_macroF1=0.9742
+  [E1_rgb__s1] epoch 18/30 val_macroF1=0.9788
+  [E1_rgb__s1] epoch 19/30 val_macroF1=0.9807
+  [E1_rgb__s1] epoch 20/30 val_macroF1=0.9808
+  [E1_rgb__s1] epoch 21/30 val_macroF1=0.9784
+  [E1_rgb__s1] epoch 22/30 val_macroF1=0.9789
+  [E1_rgb__s1] epoch 23/30 val_macroF1=0.9789
+  [E1_rgb__s1] epoch 24/30 val_macroF1=0.9787
+  [E1_rgb__s1] epoch 25/30 val_macroF1=0.9804
+  [E1_rgb__s1] epoch 26/30 val_macroF1=0.9807
+  [E1_rgb__s1] epoch 27/30 val_macroF1=0.9792
+  [E1_rgb__s1] early stop at epoch 27
+/Users/mohammedalkuhali/AI and Machine Learning Researcher/eurosat-ms-classification/src/eurosat_ms/train.py:191: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(best_path, map_location=device))
+  [E1_rgb__s1] TEST acc=0.9848 macroF1=0.9843 (1770.0s)
+/Users/mohammedalkuhali/AI and Machine Learning Researcher/eurosat-ms-classification/src/eurosat_ms/train.py:158: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+  [E1_rgb__s2] epoch 1/30 val_macroF1=0.8770
+  [E1_rgb__s2] epoch 2/30 val_macroF1=0.9500
+  [E1_rgb__s2] epoch 3/30 val_macroF1=0.9610
+  [E1_rgb__s2] epoch 4/30 val_macroF1=0.9540
+  [E1_rgb__s2] epoch 5/30 val_macroF1=0.9640
+  [E1_rgb__s2] epoch 6/30 val_macroF1=0.9661
+  [E1_rgb__s2] epoch 7/30 val_macroF1=0.9717
+  [E1_rgb__s2] epoch 8/30 val_macroF1=0.9706
+  [E1_rgb__s2] epoch 9/30 val_macroF1=0.9714
+  [E1_rgb__s2] epoch 10/30 val_macroF1=0.9712
+  [E1_rgb__s2] epoch 11/30 val_macroF1=0.9760
+  [E1_rgb__s2] epoch 12/30 val_macroF1=0.9714
+  [E1_rgb__s2] epoch 13/30 val_macroF1=0.9703
+  [E1_rgb__s2] epoch 14/30 val_macroF1=0.9628
+  [E1_rgb__s2] epoch 15/30 val_macroF1=0.9728
+  [E1_rgb__s2] epoch 16/30 val_macroF1=0.9504
+  [E1_rgb__s2] epoch 17/30 val_macroF1=0.9742
+  [E1_rgb__s2] epoch 18/30 val_macroF1=0.9778
+  [E1_rgb__s2] epoch 19/30 val_macroF1=0.9781
+  [E1_rgb__s2] epoch 20/30 val_macroF1=0.9804
+  [E1_rgb__s2] epoch 21/30 val_macroF1=0.9817
+  [E1_rgb__s2] epoch 22/30 val_macroF1=0.9788
+  [E1_rgb__s2] epoch 23/30 val_macroF1=0.9812
+  [E1_rgb__s2] epoch 24/30 val_macroF1=0.9826
+  [E1_rgb__s2] epoch 25/30 val_macroF1=0.9821
+  [E1_rgb__s2] epoch 26/30 val_macroF1=0.9811
+  [E1_rgb__s2] epoch 27/30 val_macroF1=0.9798
+  [E1_rgb__s2] epoch 28/30 val_macroF1=0.9787
+  [E1_rgb__s2] epoch 29/30 val_macroF1=0.9802
+  [E1_rgb__s2] epoch 30/30 val_macroF1=0.9798
+/Users/mohammedalkuhali/AI and Machine Learning Researcher/eurosat-ms-classification/src/eurosat_ms/train.py:191: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(best_path, map_location=device))
+  [E1_rgb__s2] TEST acc=0.9828 macroF1=0.9821 (1954.6s)
