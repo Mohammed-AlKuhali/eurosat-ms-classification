@@ -4,13 +4,13 @@ Does information beyond the visible RGB bands improve land-use classification on
 Sentinel-2 imagery? This repository builds an RGB baseline and several
 multispectral approaches on the [EuroSAT](https://github.com/phelber/EuroSAT)
 dataset, compares them under an identical 80/20 split, and analyses *where and
-why* spectral information helps — not just headline accuracy.
+why* spectral information helps, not just headline accuracy.
 
 **Full report:** [`report/report.pdf`](report/report.pdf) (LaTeX source: `report/report.tex`).
 
 ## Headline result
 
-Spectral information beyond RGB helps **conditionally** — strongly for classical
+Spectral information beyond RGB helps **conditionally**, strongly for classical
 features and for in-domain-pretrained / from-scratch networks, but negligibly (or
 harmfully) for ImageNet-pretrained networks, especially with few labels.
 
@@ -20,7 +20,7 @@ harmfully) for ImageNet-pretrained networks, especially with few labels.
 | ResNet-18 from scratch (E5a vs E5b) | 96.5% | **98.2%** | +1.7 pp |
 | SSL4EO-pretrained (E7b vs E7) | 94.4% | **97.2%** | +2.8 pp |
 | ImageNet-pretrained, full data (E1 vs E2) | **98.4%** | 98.3% | ~0 (n.s.) |
-| ImageNet-pretrained, 1% labels | **81.4%** | 74.7% | −6.7 pp |
+| ImageNet-pretrained, 1% labels | **81.4%** | 74.7% | -6.7 pp |
 
 Best overall: **E3 (RGB + NDVI/NDWI/NDBI/NDRE), 98.69 ± 0.07%**. Water-segmentation
 extension: NDWI + Otsu, micro-IoU 0.51 / Dice 0.68 on 11 hand-labelled patches.
@@ -33,7 +33,7 @@ python3.12 -m venv .venv && source .venv/bin/activate
 pip install -e .                      # data layer + classical baseline
 pip install -r requirements.txt       # adds torch/torchgeo/timm for the CNN arms
 
-# 2. Data — downloads from Zenodo and verifies the md5 checksum
+# 2. Data, downloads from Zenodo and verifies the md5 checksum
 python scripts/download_data.py --root data/raw
 export EUROSAT_DATA_ROOT=data/raw/EuroSAT_MS
 
@@ -47,7 +47,7 @@ pytest
 python scripts/run_classical.py
 python scripts/analyze.py
 
-# 6. Reproduce everything (full CNN matrix + all tables/figures) — needs a GPU
+# 6. Reproduce everything (full CNN matrix + all tables/figures), needs a GPU
 DEVICE=mps bash scripts/run_all.sh    # DEVICE=cuda on NVIDIA; ~5-7 GPU-hours
 ```
 
@@ -65,9 +65,8 @@ data/manifests/      committed stratified train/val/test split (CSV)
 data/stats/          committed per-band train normalisation statistics
 tests/               band-order + index + split-integrity guards
 docs/decisions.md    design decision log
-colab/               thin driver notebook for GPU runs
-results/             committed metrics CSVs and figures
-report/              the written report (<=2000 words)
+results/             committed metrics CSVs, tables and figures
+report/              the written report (<=2000 words) + report.pdf
 ```
 
 ## Reproducibility notes

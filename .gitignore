@@ -19,7 +19,12 @@ checkpoints/
 .DS_Store
 
 # NOTE: data/manifests/*.csv, data/stats/*.json, results/*.csv and results/figures/*
-# ARE committed — they are small and make the study reproducible/auditable.
+# ARE committed, they are small and make the study reproducible/auditable.
 !data/manifests/
 !data/stats/
 !results/
+
+# dev artifacts (regenerated; not part of the deliverable)
+results/logs/
+data/features/
+colab/

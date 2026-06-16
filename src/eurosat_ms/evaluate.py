@@ -1,4 +1,4 @@
-"""Shared evaluation used by EVERY arm — classical and CNN alike.
+"""Shared evaluation used by EVERY arm, classical and CNN alike.
 
 Producing predictions through one code path guarantees that:
   * metrics are computed identically across arms, and
@@ -7,7 +7,7 @@ Producing predictions through one code path guarantees that:
     risk of silent mis-pairing.
 
 The brief mandates accuracy on the 80/20 split; we additionally report macro-F1
-and per-class recall because EuroSAT is mildly imbalanced (2000–3000/class).
+and per-class recall because EuroSAT is mildly imbalanced (2000-3000/class).
 """
 
 from __future__ import annotations
@@ -50,7 +50,7 @@ def save_predictions(
 ) -> pd.DataFrame:
     """Write a per-sample prediction CSV keyed by image path.
 
-    Columns: path, label, pred — one row per test image, in manifest order.
+    Columns: path, label, pred, one row per test image, in manifest order.
     """
     df = pd.DataFrame({
         "path": list(paths),

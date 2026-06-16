@@ -2,17 +2,17 @@
 
 Conv1 adaptation for N-channel input is delegated to timm's canonical recipe
 (``in_chans=N`` repeats the pretrained RGB first-conv weights cyclically to N
-channels and rescales by 3/N to preserve activation magnitude — the I3D
+channels and rescales by 3/N to preserve activation magnitude, the I3D
 "inflation" idea). We do not hand-roll first-layer surgery.
 
 Pretraining options
 -------------------
-* ``imagenet``        — timm ImageNet-1k weights (RGB-domain).
-* ``none``            — random init (the from-scratch control, arm E5).
-* ``ssl4eo_all_moco`` — torchgeo SSL4EO-S12 ResNet18, 13-band Sentinel-2 (MoCo).
-* ``ssl4eo_rgb_moco`` — torchgeo SSL4EO-S12 ResNet18, RGB Sentinel-2 (MoCo).
+* ``imagenet``, timm ImageNet-1k weights (RGB-domain).
+* ``none``, random init (the from-scratch control, arm E5).
+* ``ssl4eo_all_moco``, torchgeo SSL4EO-S12 ResNet18, 13-band Sentinel-2 (MoCo).
+* ``ssl4eo_rgb_moco``, torchgeo SSL4EO-S12 ResNet18, RGB Sentinel-2 (MoCo).
 
-The two SSL4EO arms complete a clean 2x2 — {ImageNet, SSL4EO} x {RGB, all-band} —
+The two SSL4EO arms complete a clean 2x2, {ImageNet, SSL4EO} x {RGB, all-band}, 
 that separates the *pretraining domain* from the *spectral information*, so a
 full-data "MS doesn't beat RGB" result cannot be dismissed as a pretraining
 artifact.

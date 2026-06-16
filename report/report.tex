@@ -15,6 +15,7 @@
 \graphicspath{{../results/figures/}}
 \captionsetup{font=small, labelfont=bf}
 \setlength{\parskip}{2pt}
+\setlength{\emergencystretch}{1em}
 
 \title{\vspace{-1.2cm}Does spectral information beyond RGB improve land-use
 classification? A controlled study on EuroSAT}
@@ -211,8 +212,7 @@ RGB most when labels are scarce; the gap closes as data grows.}
 
 \textbf{Tier-1} reveals the largest spectral effect of the study. Multispectral
 features (C2, $91.4$\%) beat RGB features (C1, $79.3$\%) by $+12.2$~pp, with an
-overwhelmingly significant McNemar result ($p\approx7\times10^{-106}$, 901
-discordant). The per-class gains (Fig.~\ref{fig:tier1}) concentrate exactly where
+overwhelmingly significant McNemar result (901 discordant, $p<10^{-100}$). The per-class gains (Fig.~\ref{fig:tier1}) concentrate exactly where
 physics predicts: River $+28$~pp, Highway $+24$, Herbaceous Vegetation $+23$,
 Permanent Crop $+20$; the top permutation-importance features are the NDWI and
 NDRE indices.
@@ -276,6 +276,7 @@ micro-Dice & 0.614 & $\mathbf{0.675}$ & 0.523 & 0.612 \\
 \label{tab:seg}
 \end{table}
 
+\FloatBarrier
 \section{Discussion}
 The results resolve ``does multispectral help?'' into ``it depends on the
 representation that consumes it.'' Spectral information clearly helps in three

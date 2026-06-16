@@ -34,8 +34,8 @@ echo "########## SSL4EO 2x2 completion ##########"
 run configs/e7_ssl4eo_all.yaml
 run configs/e7b_ssl4eo_rgb.yaml
 
-# E4 (RGB+NIR ablation) dropped from the default run: its question — does adding
-# spectral info to RGB help — is answered more thoroughly by E2 (12-band) and E3
+# E4 (RGB+NIR ablation) dropped from the default run: its question, does adding
+# spectral info to RGB help, is answered more thoroughly by E2 (12-band) and E3
 # (RGB+indices). Run manually if desired: run configs/e4_rgbnir.yaml
 # (Documented as a scope cut in docs/decisions.md, D14.)
 

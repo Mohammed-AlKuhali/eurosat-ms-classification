@@ -11,8 +11,8 @@ Key guarantees
 * The brief's "80/20 train/test" is the (train+val) vs test partition; a
   validation slice is carved *out of the 80% train* for early stopping, so the
   test set is exactly 20% and is touched only once.
-* Manifests are written as CSVs and committed, so every arm — classical and
-  CNN — sees an identical split, which is what makes the paired McNemar test
+* Manifests are written as CSVs and committed, so every arm, classical and
+  CNN, sees an identical split, which is what makes the paired McNemar test
   valid.
 """
 

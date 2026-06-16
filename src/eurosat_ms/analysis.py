@@ -2,7 +2,7 @@
 
 All functions consume the ID-keyed prediction CSVs written by the shared
 evaluator, so two arms' predictions are always aligned by image path before any
-paired comparison — there is no way to silently mis-pair rows.
+paired comparison, there is no way to silently mis-pair rows.
 
 McNemar protocol (pre-registered, per docs/decisions.md):
   * comparison family = each multispectral arm vs the RGB baseline E1;
@@ -72,7 +72,7 @@ def _aligned_correct(results_dir, run_a: str, run_b: str):
     a = pd.read_csv(Path(results_dir, "predictions", f"{run_a}.csv"))
     b = pd.read_csv(Path(results_dir, "predictions", f"{run_b}.csv"))
     m = a.merge(b, on="path", suffixes=("_a", "_b"), validate="one_to_one")
-    assert (m["label_a"] == m["label_b"]).all(), "label mismatch — different test splits"
+    assert (m["label_a"] == m["label_b"]).all(), "label mismatch, different test splits"
     return (m["pred_a"] == m["label_a"]).to_numpy(), (m["pred_b"] == m["label_b"]).to_numpy()
 
 

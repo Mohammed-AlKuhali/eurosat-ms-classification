@@ -82,7 +82,7 @@ def main() -> None:
             V.plot_per_class_delta(d, Path(rd, "figures", f"per_class_delta__{cand}.png"),
                                    title=f"Per-class recall: {cand} - {base}")
             V.plot_confusion(A.confusion(rd, cand), Path(rd, "figures", f"confusion__{cand}.png"),
-                             title=f"Confusion matrix — {cand}")
+                             title=f"Confusion matrix, {cand}")
 
     # 4. Data-efficiency curve (if E6 fractional runs exist).
     frac = metrics[metrics["fraction"] < 1.0]

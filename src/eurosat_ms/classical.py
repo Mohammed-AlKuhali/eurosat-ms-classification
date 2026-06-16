@@ -6,8 +6,8 @@ signal, via permutation importance. It directly addresses the brief's "feature
 extraction" requirement and its emphasis on understanding band information.
 
 Two arms:
-  C1 — RGB only:    per-band statistics of B04/B03/B02.
-  C2 — multispectral: per-band statistics of the 12 bands (B10 excluded) plus
+  C1, RGB only:    per-band statistics of B04/B03/B02.
+  C2, multispectral: per-band statistics of the 12 bands (B10 excluded) plus
        statistics of the NDVI/NDWI/NDBI/NDRE indices.
 
 Features are cached to disk so repeated runs are fast.

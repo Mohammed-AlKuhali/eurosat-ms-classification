@@ -1,6 +1,6 @@
 """Sentinel-2 band definitions for the EuroSAT multispectral GeoTIFFs.
 
-CRITICAL — band order
+CRITICAL, band order
 =====================
 EuroSAT_MS ``.tif`` files store their 13 bands in this channel order::
 
@@ -41,10 +41,10 @@ RGB_BANDS: list[str] = ["B04", "B03", "B02"]
 # Near-infrared band (used by the RGB+NIR ablation, arm E4).
 NIR_BAND = "B08"
 
-# Cirrus band — near-empty over EuroSAT's cloud-screened L1C patches.
+# Cirrus band, near-empty over EuroSAT's cloud-screened L1C patches.
 CIRRUS_BAND = "B10"
 
-# 12-band "multispectral" view (B10 excluded) — the E2 arm input.
+# 12-band "multispectral" view (B10 excluded), the E2 arm input.
 BANDS_12: list[str] = [b for b in BAND_ORDER if b != CIRRUS_BAND]
 
 # ---------------------------------------------------------------------------

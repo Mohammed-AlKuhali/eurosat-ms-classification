@@ -59,7 +59,7 @@ def test_scale_invariance_of_normalized_difference():
 
 
 def test_real_forest_is_more_vegetated_than_sealake(forest_patch, sealake_patch):
-    """NDVI should be substantially higher on Forest than on Sea/Lake — a real-data
+    """NDVI should be substantially higher on Forest than on Sea/Lake, a real-data
     sanity check that index computation and band order agree with physics."""
     ndvi_forest = normalized_difference(forest_patch, "B08", "B04").mean()
     ndvi_water = normalized_difference(sealake_patch, "B08", "B04").mean()

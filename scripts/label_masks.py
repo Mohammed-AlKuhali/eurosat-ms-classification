@@ -122,12 +122,12 @@ def main() -> None:
                 plt.close(fig)
             elif event.key == "c":
                 selector.disconnect_events(); state["verts"] = []
-                print("  cleared — redraw the polygon")
+                print("  cleared, redraw the polygon")
             elif event.key == "s":
                 print(f"  skipped {rel}"); plt.close(fig)
             elif event.key == "q":
                 manifest_path.write_text(json.dumps(manifest, indent=2))
-                print("  quit — progress saved"); plt.close(fig); raise SystemExit
+                print("  quit, progress saved"); plt.close(fig); raise SystemExit
 
         fig.canvas.mpl_connect("key_press_event", on_key)
         plt.tight_layout(); plt.show()

@@ -1,14 +1,14 @@
 """PyTorch Dataset that assembles per-arm input tensors from EuroSAT patches.
 
 An arm is fully described by:
-  * ``bands``        — ordered band names to take from the patch,
-  * ``indices``      — spectral indices to append as extra channels,
-  * ``normalization``— 'zscore' (train stats) or 'div10000' (SSL4EO weights),
-plus train-time augmentation (flips + 90-degree rotations only — no photometric
+  * ``bands``, ordered band names to take from the patch,
+  * ``indices``, spectral indices to append as extra channels,
+  * ``normalization``, 'zscore' (train stats) or 'div10000' (SSL4EO weights),
+plus train-time augmentation (flips + 90-degree rotations only, no photometric
 jitter, which would corrupt the physical meaning of spectral values).
 
 Because the band list is explicit and ordered, the SSL4EO channel reordering is
-just ``bands = SSL4EO_ORDER`` with ``normalization='div10000'`` — there is no
+just ``bands = SSL4EO_ORDER`` with ``normalization='div10000'``, there is no
 separate, error-prone reindex step.
 """
 

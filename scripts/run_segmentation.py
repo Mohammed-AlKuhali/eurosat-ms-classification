@@ -83,7 +83,7 @@ def main() -> None:
         axes[i, 2].imshow(preds_by_method[best][i], cmap="Blues"); axes[i, 2].set_title(f"{best}" if i == 0 else "", fontsize=9)
         for a in axes[i]:
             a.axis("off")
-    fig.suptitle(f"Water segmentation — best method: {best}", y=1.0)
+    fig.suptitle(f"Water segmentation, best method: {best}", y=1.0)
     _save(fig, Path(args.results_dir, "figures", "segmentation_panel.png"))
     print(f"\nBest by micro-IoU: {best}. Tables -> results/tables/segmentation.csv")
 

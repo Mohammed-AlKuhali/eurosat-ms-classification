@@ -1,8 +1,8 @@
-"""Training loop for the CNN arms — seeded, checkpointed, idempotent.
+"""Training loop for the CNN arms, seeded, checkpointed, idempotent.
 
 One frozen recipe is shared across all arms (AdamW + cosine schedule + early
 stopping on validation macro-F1), so arms differ only in their inputs and
-pretraining, never in tuning. Runs are keyed by arm/seed/fraction and skip
+pretraining, not in tuning. Runs are keyed by arm/seed/fraction and skip
 themselves if already complete, which makes a dropped Colab session resumable
 by simply re-running.
 """

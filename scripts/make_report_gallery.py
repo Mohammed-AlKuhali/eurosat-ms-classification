@@ -14,8 +14,9 @@ import matplotlib.pyplot as plt
 from eurosat_ms.data import default_data_root, load_manifest, load_patch
 from eurosat_ms.visualize import true_color, false_color_nir, index_map
 
-# One patch per illustrative class (water, impervious, vegetation, crop types).
-WANT = ["River", "Highway", "Forest", "AnnualCrop", "PermanentCrop"]
+# One patch per illustrative class (water, impervious, crop), matching the
+# Grad-CAM figure so the index views and the attention maps show the same scenes.
+WANT = ["River", "Highway", "PermanentCrop"]
 COLS = [("true colour", lambda im: true_color(im)),
         ("false colour (NIR)", lambda im: false_color_nir(im)),
         ("NDVI", lambda im: index_map(im, "NDVI")),

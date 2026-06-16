@@ -23,7 +23,7 @@ EPS = 1e-9
 
 
 def water_index(img: np.ndarray, kind: str = "NDWI") -> np.ndarray:
-    """NDWI (B03,B08) or MNDWI (B03,B11) — positive over open water."""
+    """NDWI (B03,B08) or MNDWI (B03,B11), positive over open water."""
     if kind == "NDWI":
         return normalized_difference(img, "B03", "B08")
     if kind == "MNDWI":

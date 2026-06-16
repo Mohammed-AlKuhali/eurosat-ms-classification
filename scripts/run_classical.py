@@ -35,7 +35,7 @@ def plot_importance(imp_df, out_path, top=20):
     fig, ax = plt.subplots(figsize=(7, 6))
     ax.barh(d["feature"], d["importance_mean"], xerr=d["importance_std"], color="#0F6E56")
     ax.set_xlabel("permutation importance (accuracy drop)")
-    ax.set_title("Tier-1 RF — top features (C2 multispectral)")
+    ax.set_title("Tier-1 RF, top features (C2 multispectral)")
     fig.tight_layout()
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path, dpi=150)
